@@ -7,14 +7,16 @@ class card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: col.card_decoration,
-        child: ExpansionTile(
-          backgroundColor: col.background_color_card,
-          title: Text("TEST_TITLE"),
-          children: <Widget>[
-            Container(
-                decoration: col.card_decoration, child: Text("Description 1"))
-          ],
-        ));
+        margin: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+            color: col.background_color_card,
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        // decoration: col.card_decoration,
+        child: build_body(context, "Card"));
+  }
+
+  Widget build_body(BuildContext context, String title) {
+    return SizedBox(height: 80, child: Center(child: Text(title)));
   }
 }
