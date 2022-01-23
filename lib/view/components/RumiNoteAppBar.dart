@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class app_bar extends StatelessWidget with PreferredSizeWidget {
+class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
 
   @override
   final Size preferredSize;
 
-  app_bar(this.title, {Key? key})
+  RuminoteAppBar(this.title, {Key? key})
       : preferredSize = const Size.fromHeight(50.0),
         super(key: key);
 
