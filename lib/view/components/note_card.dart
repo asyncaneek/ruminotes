@@ -3,17 +3,29 @@ import 'package:rumi_notes/model/note.dart';
 import 'package:rumi_notes/view/components/note_list.dart';
 import 'package:intl/intl.dart';
 
-class NoteCard extends StatelessWidget {
-  static const String errorString = "error - no data";
-  String titleStr = errorString;
-  String bodyStr = errorString;
-  String timeStr = errorString;
+class NoteCard extends StatefulWidget {
+  final Note? note;
 
-  NoteCard({Key? key, required Note? note}) : super(key: key) {
-    if (note != null) {
-      titleStr = note.title ?? "";
-      bodyStr = note.text ?? "";
-      timeStr = DateFormat('E, MMM dd').format(note.time);
+  const NoteCard({Key? key, this.note}) : super(key: key);
+
+  @override
+  State<NoteCard> createState() => _NoteCardState();
+}
+
+class _NoteCardState extends State<NoteCard> {
+  late String titleStr;
+  late String bodyStr;
+  late String timeStr;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.note != null) {
+      titleStr = widget.note?.title ?? "";
+      bodyStr = widget.note?.text ?? "";
+      if (widget.note?.time != null) {
+        timeStr = DateFormat('E, MMM dd').format(widget.note!.time);
+      }
     }
   }
 
