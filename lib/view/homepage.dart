@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rumi_notes/data_source/local_strorage.dart';
-import 'package:rumi_notes/view/responsive/MobileBody.dart';
-import 'package:rumi_notes/view/responsive/ResponsiveLayout.dart';
+import 'package:rumi_notes/view/responsive/mobile_body.dart';
+import 'package:rumi_notes/view/responsive/responsive_layout.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({

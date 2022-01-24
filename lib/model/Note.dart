@@ -1,9 +1,10 @@
-import 'NoteId.dart';
+import 'note_id.dart';
 
 class Note {
   NoteId? id;
-  String body = "New Note";
+  String? title = "Title";
+  String? text = "New Note";
   DateTime time = DateTime.now();
 
-  Note({this.id, required this.body});
+  Note({this.id, this.title, this.text});
 }

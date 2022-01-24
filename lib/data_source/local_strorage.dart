@@ -1,13 +1,23 @@
-import 'package:rumi_notes/model/NoteId.dart';
-import 'package:rumi_notes/model/Note.dart';
-import 'package:rumi_notes/model/StorageInterface.dart';
+import 'package:rumi_notes/model/note_id.dart';
+import 'package:rumi_notes/model/note.dart';
+import 'package:rumi_notes/model/storage_interface.dart';
 
 class LocalStorage extends StorageInterface {
   List<Note> notes = [];
 
   LocalStorage() {
-    for (var i = 0; i < 20; i++) {
-      notes.add(Note(id: NoteId(i), body: "Testing #$i"));
+    for (var i = 0; i < 2; i++) {
+      notes.add(Note(id: NoteId(i), title: "Title $i", text: "Short Note $i"));
+      notes.add(Note(
+          id: NoteId(i),
+          title: "Title $i",
+          text:
+              "This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
+      notes.add(Note(
+          id: NoteId(i),
+          title: "Title $i",
+          text:
+              "This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
     }
   }
 
@@ -17,10 +27,8 @@ class LocalStorage extends StorageInterface {
   }
 
   @override
-  Note? getNoteAtIndex(int index)
-  // async
-  {
-    // await Future.delayed(const Duration(seconds: 2));
+  Future<Note?> getNoteAtIndex(int index) async {
+    await Future.delayed(const Duration(milliseconds: 1000));
     if (index < notes.length && index >= 0) {
       return notes.elementAt(index);
     }
