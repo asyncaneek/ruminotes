@@ -1,4 +1,4 @@
-import 'note_id.dart';
+import 'note_id.dart' show NoteId;
 
 class Note {
   NoteId? id;

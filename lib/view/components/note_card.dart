@@ -21,11 +21,9 @@ class _NoteCardState extends State<NoteCard> {
   void initState() {
     super.initState();
     if (widget.note != null) {
-      titleStr = widget.note?.title ?? "";
-      bodyStr = widget.note?.text ?? "";
-      if (widget.note?.time != null) {
-        timeStr = DateFormat('E, MMM dd').format(widget.note!.time);
-      }
+      titleStr = widget.note!.title ?? "";
+      bodyStr = widget.note!.text ?? "";
+      timeStr = DateFormat('E, MMM dd').format(widget.note!.time);
     }
   }
 
