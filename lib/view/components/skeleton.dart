@@ -17,7 +17,7 @@ class Skeleton extends StatelessWidget {
       padding: EdgeInsets.all(padding / 2),
       decoration: BoxDecoration(
           color: backgroundColorApp.withOpacity(opacity ?? 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(padding))),
+          borderRadius: BorderRadius.all(Radius.circular(padding / 2))),
     );
   }
 }

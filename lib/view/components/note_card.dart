@@ -5,6 +5,7 @@ import 'package:rumi_notes/view/components/card/card_bar.dart';
 import 'package:rumi_notes/view/components/card/card_body.dart';
 import 'package:rumi_notes/view/components/card/card_details.dart';
 import 'package:rumi_notes/view/components/card/card_title.dart';
+import 'package:rumi_notes/view/components/colors.dart';
 import 'package:rumi_notes/view/components/defines.dart';
 import 'package:intl/intl.dart';
 import 'package:rumi_notes/view/components/skeleton.dart';
@@ -47,48 +48,32 @@ class _NoteCardState extends State<NoteCard> {
           motion: const ScrollMotion(),
 
           // A pane can dismiss the Slidable.
-          dismissible: DismissiblePane(onDismissed: () {}),
+          // dismissible: DismissiblePane(onDismissed: () {}),
 
           // All actions are defined in the children parameter.
-          children: const [
+          children: [
             // A SlidableAction can have an icon and/or a label.
             SlidableAction(
-              onPressed: null,
-              backgroundColor: Color(0xFFFE4A49),
-              foregroundColor: Colors.white,
-              icon: Icons.delete,
-              label: 'Delete',
-            ),
-            SlidableAction(
-              onPressed: null,
-              backgroundColor: Color(0xFF21B7CA),
-              foregroundColor: Colors.white,
-              icon: Icons.share,
-              label: 'Share',
-            ),
+                autoClose: true,
+                onPressed: null,
+                backgroundColor: const Color(0xFFFE4A49).withOpacity(0.5),
+                foregroundColor: Colors.white,
+                icon: Icons.delete,
+                label: 'Delete'),
           ],
         ),
 
         // The end action pane is the one at the right or the bottom side.
-        endActionPane: const ActionPane(
-          motion: ScrollMotion(),
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
           children: [
             SlidableAction(
-              // An action can be bigger than the others.
-              flex: 2,
-              onPressed: null,
-              backgroundColor: Color(0xFF7BC043),
-              foregroundColor: Colors.white,
-              icon: Icons.archive,
-              label: 'Archive',
-            ),
-            SlidableAction(
-              onPressed: null,
-              backgroundColor: Color(0xFF0392CF),
-              foregroundColor: Colors.white,
-              icon: Icons.save,
-              label: 'Save',
-            ),
+                autoClose: true,
+                onPressed: null,
+                backgroundColor: accentColor.withOpacity(0.5),
+                foregroundColor: Colors.white,
+                icon: Icons.copy,
+                label: 'Duplicate')
           ],
         ),
 
