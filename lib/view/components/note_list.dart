@@ -41,11 +41,30 @@ class AsyncNoteCard extends StatelessWidget {
                   snapshot.hasData) {
                 return NoteCard(note: snapshot.data);
               } else {
-                return const Padding(
-                  padding: EdgeInsets.all(defPadding / 2),
-                  child: Skeleton(
-                    height: 60,
-                    opacity: 0.2,
+                return Padding(
+                  padding: const EdgeInsets.all(defPadding / 2),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Skeleton(height: 20, width: 20, opacity: 0.2),
+                        ],
+                      ),
+                      const Skeleton(height: defPadding / 2, opacity: 0),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Skeleton(height: 20, width: 250, opacity: 0.2)
+                          ]),
+                      const Skeleton(height: defPadding / 2, opacity: 0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Skeleton(height: 10, width: 60, opacity: 0.2),
+                        ],
+                      )
+                    ],
                   ),
                 );
               }
