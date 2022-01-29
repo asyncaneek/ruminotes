@@ -34,7 +34,7 @@ class AsyncNoteCard extends StatelessWidget {
     return Card(
         child: FutureBuilder<Note?>(
             future: note,
-            initialData: Note(title: "error - no data"),
+            initialData: Note(title: " "),
             builder: (BuildContext context, AsyncSnapshot<Note?> snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   !snapshot.hasError &&

@@ -6,19 +6,22 @@ class LocalStorage extends StorageInterface {
   List<Note> notes = [];
 
   LocalStorage() {
-    for (var i = 0; i < 2; i++) {
-      notes.add(Note(id: NoteId(i), title: "Title $i", text: "Short Note $i"));
-      notes.add(Note(
-          id: NoteId(i),
-          title: "Title $i",
-          text:
-              "This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
-      notes.add(Note(
-          id: NoteId(i),
-          title: "Title $i",
-          text:
-              "This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
-    }
+    int i = 0;
+    notes.add(Note(id: NoteId(i), title: "Title $i"));
+    notes.add(Note(
+        id: NoteId(i),
+        title: "REALLY really really really really really long Title $i",
+        text: "Short Note $i")); // no body text
+    notes.add(Note(
+        id: NoteId(i),
+        title: "Title $i",
+        text:
+            "This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
+    notes.add(Note(
+        id: NoteId(i),
+        title: "Title $i",
+        text:
+            "This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
   }
 
   @override
