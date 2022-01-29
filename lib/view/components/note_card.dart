@@ -140,11 +140,11 @@ class _NoteCardState extends State<NoteCard> {
 }
 
 class CardBar extends StatelessWidget {
-  String? timeStr;
-  bool isExpanded;
-  bool showDropDown;
+  final String? timeStr;
+  final bool isExpanded;
+  final bool showDropDown;
 
-  CardBar(
+  const CardBar(
       {Key? key,
       required this.timeStr,
       required this.isExpanded,
@@ -159,7 +159,7 @@ class CardBar extends StatelessWidget {
         children: [
           Text(timeStr ?? "", style: const TextStyle(fontSize: 12)),
           Icon(
-            isExpanded! ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+            isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
             size: 30.0,
             color: accentColor,
           ),
