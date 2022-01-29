@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rumi_notes/model/note.dart';
 import 'package:rumi_notes/model/storage_interface.dart';
+import 'package:rumi_notes/view/components/defines.dart';
 import 'package:rumi_notes/view/components/note_card.dart';
 import 'package:rumi_notes/view/components/skeleton.dart';
-
-const double defPadding = 16.0;
 
 class CardList extends StatelessWidget {
   final StorageInterface storage;
@@ -14,12 +13,12 @@ class CardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        padding: const EdgeInsets.all(defPadding / 2),
+        padding: const EdgeInsets.all(defaultPadding / 2),
         itemBuilder: (context, index) {
           return AsyncNoteCard(note: storage.getNoteAtIndex(index));
         },
         separatorBuilder: (BuildContext context, i) =>
-            const Skeleton(height: defPadding / 2),
+            const Skeleton(height: defaultPadding / 2),
         itemCount: storage.getNotesCount());
   }
 }
@@ -42,7 +41,7 @@ class AsyncNoteCard extends StatelessWidget {
                 return NoteCard(note: snapshot.data);
               } else {
                 return Padding(
-                  padding: const EdgeInsets.all(defPadding / 2),
+                  padding: const EdgeInsets.all(defaultPadding / 2),
                   child: Column(
                     children: [
                       Row(
@@ -51,13 +50,13 @@ class AsyncNoteCard extends StatelessWidget {
                           Skeleton(height: 20, width: 20, opacity: 0.2),
                         ],
                       ),
-                      const Skeleton(height: defPadding / 2, opacity: 0),
+                      const Skeleton(height: defaultPadding / 2, opacity: 0),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: const [
                             Skeleton(height: 20, width: 250, opacity: 0.2)
                           ]),
-                      const Skeleton(height: defPadding / 2, opacity: 0),
+                      const Skeleton(height: defaultPadding / 2, opacity: 0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: const [

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:rumi_notes/model/note.dart';
-import 'package:rumi_notes/view/components/colors.dart';
-import 'package:rumi_notes/view/components/note_list.dart';
+import 'package:rumi_notes/view/components/card/card_bar.dart';
+import 'package:rumi_notes/view/components/card/card_body.dart';
+import 'package:rumi_notes/view/components/card/card_details.dart';
+import 'package:rumi_notes/view/components/card/card_title.dart';
+import 'package:rumi_notes/view/components/defines.dart';
 import 'package:intl/intl.dart';
 import 'package:rumi_notes/view/components/skeleton.dart';
 
@@ -109,11 +112,11 @@ class _NoteCardState extends State<NoteCard> {
       children: <Widget>[
         buildCardBar(),
         CardTitle(titleStr: titleStr),
-        const Skeleton(height: defPadding / 2, opacity: 0),
+        const Skeleton(height: defaultPadding / 2, opacity: 0),
         CardBody(bodyStr: bodyStr),
-        const Skeleton(height: defPadding / 4, opacity: 0),
+        const Skeleton(height: defaultPadding / 4, opacity: 0),
         const CardDetails(),
-        const Skeleton(height: defPadding / 4, opacity: 0),
+        const Skeleton(height: defaultPadding / 4, opacity: 0),
       ],
     );
   }
@@ -124,107 +127,17 @@ class _NoteCardState extends State<NoteCard> {
         children: <Widget>[
           buildCardBar(),
           CardTitle(titleStr: titleStr),
-          const Skeleton(height: defPadding / 2, opacity: 0),
+          const Skeleton(height: defaultPadding / 2, opacity: 0),
         ]);
   }
 
   Widget buildCardBar() {
     return Padding(
-      padding: const EdgeInsets.only(left: defPadding),
+      padding: const EdgeInsets.only(left: defaultPadding),
       child: CardBar(
         timeStr: timeStr,
         isExpanded: isExpanded,
         showDropDown: bodyStr.isNotEmpty,
-      ),
-    );
-  }
-}
-
-class CardBar extends StatelessWidget {
-  final String? timeStr;
-  final bool isExpanded;
-  final bool showDropDown;
-
-  const CardBar(
-      {Key? key,
-      required this.timeStr,
-      required this.isExpanded,
-      this.showDropDown = true})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (showDropDown) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(timeStr ?? "", style: const TextStyle(fontSize: 12)),
-          Icon(
-            isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-            size: 30.0,
-            color: accentColor,
-          ),
-        ],
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Skeleton(height: defPadding / 2, opacity: 0),
-        Text(timeStr ?? "", style: const TextStyle(fontSize: 12)),
-        const Skeleton(height: defPadding / 2, opacity: 0),
-      ],
-    );
-  }
-}
-
-class CardDetails extends StatelessWidget {
-  const CardDetails({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class CardTitle extends StatelessWidget {
-  const CardTitle({
-    Key? key,
-    required this.titleStr,
-  }) : super(key: key);
-
-  final String titleStr;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: defPadding, left: defPadding),
-      child: Text(
-        titleStr,
-        style: const TextStyle(fontSize: 18),
-      ),
-    );
-  }
-}
-
-class CardBody extends StatelessWidget {
-  const CardBody({
-    Key? key,
-    required this.bodyStr,
-  }) : super(key: key);
-
-  final String bodyStr;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: defPadding, left: defPadding),
-      child: Text(
-        bodyStr,
-        maxLines: null,
-        style: const TextStyle(fontSize: 14),
       ),
     );
   }
