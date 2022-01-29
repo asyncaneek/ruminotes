@@ -91,9 +91,16 @@ class _NoteCardState extends State<NoteCard> {
 
         // The child of the Slidable is what the user sees when the
         // component is not dragged.
-        child: isExpanded
-            ? buildExpandedCard()
-            : buildCollapsedCard(bodyStr.isNotEmpty));
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+          },
+          child: isExpanded && bodyStr.isNotEmpty
+              ? buildExpandedCard()
+              : buildCollapsedCard(),
+        ));
   }
 
   Widget buildExpandedCard() {
@@ -111,7 +118,7 @@ class _NoteCardState extends State<NoteCard> {
     );
   }
 
-  Widget buildCollapsedCard(bool showDropdown) {
+  Widget buildCollapsedCard() {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -121,21 +128,15 @@ class _NoteCardState extends State<NoteCard> {
         ]);
   }
 
-  InkWell buildCardBar() {
-    return InkWell(
-        onTap: () {
-          setState(() {
-            isExpanded = !isExpanded;
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(left: defPadding),
-          child: CardBar(
-            timeStr: timeStr,
-            isExpanded: isExpanded,
-            showDropDown: bodyStr.isNotEmpty,
-          ),
-        ));
+  Widget buildCardBar() {
+    return Padding(
+      padding: const EdgeInsets.only(left: defPadding),
+      child: CardBar(
+        timeStr: timeStr,
+        isExpanded: isExpanded,
+        showDropDown: bodyStr.isNotEmpty,
+      ),
+    );
   }
 }
 
