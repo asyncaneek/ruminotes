@@ -42,6 +42,8 @@ class _BackDropState extends State<BackDrop> with TickerProviderStateMixin {
     } else if (!_isFrontLayerExpanded) {
       _controller.fling(velocity: _kFlingVelocity);
     }
+
+    widget.onMenuOpen.value = !_isFrontLayerExpanded;
   }
 
   // initialise the controller.
@@ -80,7 +82,12 @@ class _BackDropState extends State<BackDrop> with TickerProviderStateMixin {
   // we need BoxConstraints to get the size of the box
   Widget _buildBackDropStack(BuildContext context, BoxConstraints constraints) {
     const double layerTitleHeight = 50;
-    final Size layerSize = Size(constraints.maxWidth, 50 * (menuItemCount + 2));
+    // TODO: this is still app specific. try to make it generic
+    final Size layerSize = Size(
+        constraints.maxWidth,
+        (50 * (menuItemCount + 1)) +
+            (MediaQuery.of(context).padding.vertical * 2));
+    // Size(constraints.maxWidth,        constraints.maxHeight - (MediaQuery.of(context).padding.vertical));
     final double layerTop = layerSize.height - layerTitleHeight;
 
     Animation<RelativeRect> layerAnimation = RelativeRectTween(
