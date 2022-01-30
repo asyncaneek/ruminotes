@@ -26,6 +26,12 @@ class _NoteCardState extends State<NoteCard> {
 
   bool isExpanded = false;
 
+  void setExpanded(bool expanded) {
+    setState(() {
+      isExpanded = expanded;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -60,11 +66,21 @@ class _NoteCardState extends State<NoteCard> {
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
                 label: 'Delete'),
+            SlidableAction(
+                autoClose: true,
+                onPressed: null,
+                backgroundColor: const Color(0xFFDB9825).withOpacity(0.5),
+                foregroundColor: Colors.white,
+                icon: Icons.edit,
+                label: 'Edit'),
           ],
         ),
 
         // The end action pane is the one at the right or the bottom side.
         endActionPane: ActionPane(
+          dragDismissible: true,
+          dismissible: DismissiblePane(onDismissed: () {}),
+          extentRatio: 0.25,
           motion: const ScrollMotion(),
           children: [
             SlidableAction(
@@ -79,41 +95,34 @@ class _NoteCardState extends State<NoteCard> {
 
         // The child of the Slidable is what the user sees when the
         // component is not dragged.
-        child: InkWell(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          child: isExpanded && bodyStr.isNotEmpty
-              ? buildExpandedCard()
-              : buildCollapsedCard(),
-        ));
+        child: buildCard(isExpanded && bodyStr.isNotEmpty));
   }
 
-  Widget buildExpandedCard() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        buildCardBar(),
-        CardTitle(titleStr: titleStr),
-        const Skeleton(height: defaultPadding / 2, opacity: 0),
-        CardBody(bodyStr: bodyStr),
-        const Skeleton(height: defaultPadding / 4, opacity: 0),
-        const CardDetails(),
-        const Skeleton(height: defaultPadding / 4, opacity: 0),
-      ],
+  Widget buildCard(bool isExpanded) {
+    List<Widget> children = [];
+
+    children.add(buildCardBar());
+    children.add(CardTitle(titleStr: titleStr));
+    children.add(const Skeleton(height: defaultPadding / 2, opacity: 0));
+
+    if (isExpanded) {
+      children.add(CardBody(bodyStr: bodyStr));
+      children.add(const Skeleton(height: defaultPadding / 4, opacity: 0));
+    }
+
+    children.add(const CardDetails());
+    children.add(const Skeleton(height: defaultPadding / 4, opacity: 0));
+
+    return InkWell(
+      onTap: () => setExpanded(!isExpanded),
+      child: GestureDetector(
+        onVerticalDragUpdate: (details) {
+          setExpanded(details.delta.dy >= 0);
+        },
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, children: children),
+      ),
     );
-  }
-
-  Widget buildCollapsedCard() {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          buildCardBar(),
-          CardTitle(titleStr: titleStr),
-          const Skeleton(height: defaultPadding / 2, opacity: 0),
-        ]);
   }
 
   Widget buildCardBar() {
