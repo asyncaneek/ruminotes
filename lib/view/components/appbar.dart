@@ -2,16 +2,36 @@ import 'package:flutter/material.dart';
 
 class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
-
+  final ValueNotifier<bool> isMenuOpen;
   @override
   final Size preferredSize;
 
-  RuminoteAppBar(this.title, {Key? key})
+  RuminoteAppBar(this.title, this.isMenuOpen, {Key? key})
       : preferredSize = const Size.fromHeight(50.0),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(title: Center(child: Text(title)));
+    return AppBar(
+        title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title),
+        _resolveIcon(),
+      ],
+    ));
+  }
+
+  ValueListenableBuilder<bool> _resolveIcon() {
+    return ValueListenableBuilder<bool>(
+        valueListenable: isMenuOpen,
+        builder: (context, value, child) {
+          return ImageIcon(
+            AssetImage(value
+                ? "assets/icons/up_double_arrows.png"
+                : "assets/icons/down_double_arrows.png"),
+            size: 24,
+          );
+        });
   }
 }

@@ -6,7 +6,10 @@ import 'package:rumi_notes/view/components/appbar.dart';
 import 'package:rumi_notes/view/components/note_list.dart';
 
 class MobileBody extends StatelessWidget {
-  const MobileBody({Key? key, required this.storage}) : super(key: key);
+  ValueNotifier<bool> isMenuOpen = ValueNotifier(false);
+
+  MobileBody({Key? key, required this.storage, required this.isMenuOpen})
+      : super(key: key);
 
   final StorageInterface storage;
 
@@ -14,7 +17,7 @@ class MobileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: backgroundColorApp,
-        appBar: RuminoteAppBar(appName),
+        appBar: RuminoteAppBar(appName, isMenuOpen),
         body: CardList(storage: storage));
   }
 }

@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:rumi_notes/data_source/local_strorage.dart';
+import 'package:rumi_notes/view/components/backdrop/backdrop.dart';
+import 'package:rumi_notes/view/components/backdrop/backdrop_menu.dart';
+import 'package:rumi_notes/view/components/backdrop/defines.dart';
 import 'package:rumi_notes/view/responsive/mobile_body.dart';
-import 'package:rumi_notes/view/responsive/responsive_layout.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
-    Key? key,
-  }) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  ValueNotifier<bool> isMenuOpen = ValueNotifier(false);
+  int currentIndex = 0;
+
+  final LocalStorage storage = LocalStorage();
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final LocalStorage storage = LocalStorage();
+  void onTileTap(int index) {
+    setState(() {
+      widget.currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ResponsiveLayout(
-        mobileBody: MobileBody(storage: storage),
-        desktopBody: MobileBody(storage: storage),
+    return BackDrop(
+      onMenuOpen: widget.isMenuOpen,
+      currentIndex: widget.currentIndex,
+      backLayer: BackdropMenu(
+        selectedItem: widget.currentIndex,
+        onTileTap: onTileTap,
+        itemCount: menuItemCount,
+      ),
+      frontLayer: MobileBody(
+        storage: widget.storage,
+        isMenuOpen: widget.isMenuOpen,
       ),
     );
   }
