@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rumi_notes/view/components/backdrop/defines.dart';
+import 'package:rumi_notes/view/components/defines.dart';
 
 const double _kFlingVelocity = 2.0;
 
@@ -29,6 +30,8 @@ class BackDrop extends StatefulWidget {
 
 class _BackDropState extends State<BackDrop> with TickerProviderStateMixin {
   late AnimationController _controller;
+
+  bool _dragStarted = false;
 
   @override
   void didUpdateWidget(BackDrop old) {
@@ -76,16 +79,16 @@ class _BackDropState extends State<BackDrop> with TickerProviderStateMixin {
   void _toggleBackDropLayerVisibility() {
     _controller.fling(
         velocity: _isFrontLayerExpanded ? -_kFlingVelocity : _kFlingVelocity);
+    widget.onMenuOpen.value = !_isFrontLayerExpanded;
   }
 
   // our main backdrop stack
   // we need BoxConstraints to get the size of the box
   Widget _buildBackDropStack(BuildContext context, BoxConstraints constraints) {
-    const double layerTitleHeight = 50;
-    // TODO: this is still app specific. try to make it generic
+    const double layerTitleHeight = appBarPrefferedSize;
     final Size layerSize = Size(
         constraints.maxWidth,
-        (50 * (menuItemCount + 1)) +
+        (listTilePrefferedHeight * (menuItemCount + 1)) +
             (MediaQuery.of(context).padding.vertical * 2));
     // Size(constraints.maxWidth,        constraints.maxHeight - (MediaQuery.of(context).padding.vertical));
     final double layerTop = layerSize.height - layerTitleHeight;
@@ -110,29 +113,48 @@ class _BackDropState extends State<BackDrop> with TickerProviderStateMixin {
         PositionedTransition(
           rect: layerAnimation,
           child: GestureDetector(
+            onTapUp: (details) {
+              if (details.localPosition.dy <=
+                  MediaQuery.of(context).padding.top + appBarPrefferedSize) {
+                _toggleBackDropLayerVisibility();
+              }
+            },
+
+            onVerticalDragStart: (details) {
+              if (details.localPosition.dy <=
+                  MediaQuery.of(context).padding.top + appBarPrefferedSize) {
+                _dragStarted = true;
+              }
+            },
+
             /// move according to the finger's position
             onVerticalDragUpdate: (details) {
-              if (details.primaryDelta! > 0) {
-                _controller.value -= details.primaryDelta! / layerSize.height;
-              } else {
-                _controller.value -= details.primaryDelta! / layerSize.height;
+              if (_dragStarted) {
+                if (details.primaryDelta! > 0) {
+                  _controller.value -= details.primaryDelta! / layerSize.height;
+                } else {
+                  _controller.value -= details.primaryDelta! / layerSize.height;
+                }
+                widget.onMenuOpen.value = !_isFrontLayerExpanded;
               }
-              widget.onMenuOpen.value = !_isFrontLayerExpanded;
             },
 
             /// when the drag ends, we get the velocity with which the gesture was stopped
             /// we then use this velocity to finish the rest of the animation according to our location
             onVerticalDragEnd: (DragEndDetails details) {
-              if (details.primaryVelocity! < 0) {
-                _controller.fling(
-                  velocity: -details.primaryVelocity! / layerSize.height,
-                );
-              } else {
-                _controller.fling(
-                  velocity: -details.primaryVelocity! / layerSize.height,
-                );
+              if (_dragStarted) {
+                if (details.primaryVelocity! < 0) {
+                  _controller.fling(
+                    velocity: -details.primaryVelocity! / layerSize.height,
+                  );
+                } else {
+                  _controller.fling(
+                    velocity: -details.primaryVelocity! / layerSize.height,
+                  );
+                }
+                widget.onMenuOpen.value = !_isFrontLayerExpanded;
+                _dragStarted = false;
               }
-              widget.onMenuOpen.value = !_isFrontLayerExpanded;
             },
 
             child: Transform(

@@ -18,6 +18,10 @@ class MobileBody extends StatelessWidget {
     return Scaffold(
         backgroundColor: backgroundColorApp,
         appBar: RuminoteAppBar(appName, isMenuOpen),
-        body: CardList(storage: storage));
+        body: Center(
+          child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: CardList(storage: storage)),
+        ));
   }
 }

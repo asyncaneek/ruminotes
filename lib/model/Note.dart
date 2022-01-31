@@ -4,7 +4,7 @@ class Note {
   NoteId? id;
   String? title = "Title";
   String? text = "New Note";
-  DateTime time = DateTime.now();
+  DateTime? time = DateTime.now();
 
-  Note({this.id, this.title, this.text});
+  Note({this.id, this.title, this.text, this.time});
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rumi_notes/view/components/defines.dart';
 
 class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -7,7 +8,7 @@ class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
   final Size preferredSize;
 
   RuminoteAppBar(this.title, this.isMenuOpen, {Key? key})
-      : preferredSize = const Size.fromHeight(50.0),
+      : preferredSize = const Size.fromHeight(appBarPrefferedSize),
         super(key: key);
 
   @override
@@ -30,7 +31,7 @@ class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
             AssetImage(value
                 ? "assets/icons/up_double_arrows.png"
                 : "assets/icons/down_double_arrows.png"),
-            size: 24,
+            size: 20,
           );
         });
   }

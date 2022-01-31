@@ -7,21 +7,16 @@ class LocalStorage extends StorageInterface {
 
   LocalStorage() {
     int i = 0;
-    notes.add(Note(id: NoteId(i), title: "Title $i"));
-    notes.add(Note(
-        id: NoteId(i),
-        title: "REALLY really really really really really long Title $i",
-        text: "Short Note $i")); // no body text
-    notes.add(Note(
-        id: NoteId(i),
-        title: "Title $i",
-        text:
-            "This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
-    notes.add(Note(
-        id: NoteId(i),
-        title: "Title $i",
-        text:
-            "This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti This is a really long note to test mlti line text on a card and proper resizing of the card $i"));
+    for (var v = 1; v < 10; v += 2) {
+      notes.add(
+        Note(
+          id: NoteId(v),
+          title: "Haircut",
+          text: "Case Cuts Barbershop",
+          time: DateTime(2021, 11, v),
+        ),
+      );
+    }
   }
 
   @override
@@ -31,7 +26,7 @@ class LocalStorage extends StorageInterface {
 
   @override
   Future<Note?> getNoteAtIndex(int index) async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 500));
     if (index < notes.length && index >= 0) {
       return notes.elementAt(index);
     }
