@@ -6,7 +6,6 @@ class LocalStorage extends StorageInterface {
   List<Note> notes = [];
 
   LocalStorage() {
-    int i = 0;
     for (var v = 1; v < 10; v += 2) {
       notes.add(
         Note(

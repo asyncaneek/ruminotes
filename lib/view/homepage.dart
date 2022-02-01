@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rumi_notes/data_source/local_strorage.dart';
-import 'package:rumi_notes/view/components/backdrop/backdrop.dart';
-import 'package:rumi_notes/view/components/backdrop/backdrop_menu.dart';
-import 'package:rumi_notes/view/components/backdrop/defines.dart';
+import 'package:rumi_notes/view/components/menu/backdrop.dart';
+import 'package:rumi_notes/view/components/menu/backdrop_menu.dart';
+import 'package:rumi_notes/view/components/menu/defines.dart';
 import 'package:rumi_notes/view/responsive/mobile_body.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       backLayer: BackdropMenu(
         selectedItem: widget.currentIndex,
         onTileTap: onTileTap,
-        itemCount: menuItemCount,
+        itemCount: menuItems.length,
       ),
       frontLayer: MobileBody(
         storage: widget.storage,

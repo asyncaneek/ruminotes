@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rumi_notes/view/components/backdrop/defines.dart';
+import 'package:rumi_notes/view/components/menu/defines.dart';
 import 'package:rumi_notes/view/components/defines.dart';
 
 const double _kFlingVelocity = 2.0;
@@ -88,7 +88,7 @@ class _BackDropState extends State<BackDrop> with TickerProviderStateMixin {
     const double layerTitleHeight = appBarPrefferedSize;
     final Size layerSize = Size(
         constraints.maxWidth,
-        (listTilePrefferedHeight * (menuItemCount + 1)) +
+        (listTilePrefferedHeight * (menuItems.length + 1)) +
             (MediaQuery.of(context).padding.vertical * 2));
     // Size(constraints.maxWidth,        constraints.maxHeight - (MediaQuery.of(context).padding.vertical));
     final double layerTop = layerSize.height - layerTitleHeight;
