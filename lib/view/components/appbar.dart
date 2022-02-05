@@ -1,38 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:rumi_notes/view/components/defines.dart';
+import 'package:rumi_notes/view/components/menu/backdrop_menu.dart';
+import 'package:rumi_notes/view/components/menu/defines.dart';
+import 'package:rumi_notes/view/components/skeleton.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
+class RuminoteAppBar extends StatelessWidget {
   final String title;
-  final ValueNotifier<bool> isMenuOpen;
-  @override
-  final Size preferredSize;
 
-  RuminoteAppBar(this.title, this.isMenuOpen, {Key? key})
-      : preferredSize = const Size.fromHeight(appBarPrefferedSize),
-        super(key: key);
+  const RuminoteAppBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-        title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title),
-        _resolveIcon(),
-      ],
-    ));
-  }
-
-  ValueListenableBuilder<bool> _resolveIcon() {
-    return ValueListenableBuilder<bool>(
-        valueListenable: isMenuOpen,
-        builder: (context, value, child) {
-          return ImageIcon(
-            AssetImage(value
-                ? "assets/icons/up_double_arrows.png"
-                : "assets/icons/down_double_arrows.png"),
-            size: 20,
-          );
-        });
+    return SizedBox(
+      height: appBarPrefferedSize,
+      child: Center(
+        child: Text(
+          appName,
+          style: Theme.of(context).textTheme.headline4,
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rumi_notes/view/components/colors.dart';
 import 'view/homepage.dart';
 
 void main() {
@@ -12,8 +13,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      home: Scaffold(
+        body: HomePage(),
+      ),
+      theme: ThemeData(
+          iconTheme: const IconThemeData(
+            color: backgroundColorApp,
+          ),
+          backgroundColor: backgroundColorApp,
+          cardColor: backgroundColorCard,
+          primarySwatch: Colors.deepPurple),
     );
   }
 }

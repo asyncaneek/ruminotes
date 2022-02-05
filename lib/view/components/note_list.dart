@@ -12,12 +12,18 @@ class CardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        padding: const EdgeInsets.all(defaultPadding / 2),
-        itemBuilder: (context, index) {
-          return CardAsync(note: storage.getNoteAtIndex(index));
-        },
-        separatorBuilder: (BuildContext context, i) =>
-            const Skeleton(height: defaultPadding / 2),
-        itemCount: storage.getNotesCount());
+      padding: const EdgeInsets.all(defaultPadding / 2),
+      itemBuilder: (context, index) {
+        return CardAsync(
+            note: storage.getNoteAtIndex(
+          index,
+        ));
+      },
+      separatorBuilder: (BuildContext context, i) => const Skeleton(
+        height: defaultPadding / 2,
+        opacity: 0,
+      ),
+      itemCount: storage.count,
+    );
   }
 }

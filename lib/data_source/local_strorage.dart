@@ -6,7 +6,7 @@ class LocalStorage extends StorageInterface {
   List<Note> notes = [];
 
   LocalStorage() {
-    for (var v = 1; v < 10; v += 2) {
+    for (var v = 1; v < 50; v += 2) {
       notes.add(
         Note(
           id: NoteId(v),
@@ -19,15 +19,13 @@ class LocalStorage extends StorageInterface {
   }
 
   @override
-  int getNotesCount() {
-    return notes.length;
-  }
-
-  @override
   Future<Note?> getNoteAtIndex(int index) async {
     await Future.delayed(const Duration(milliseconds: 500));
     if (index < notes.length && index >= 0) {
       return notes.elementAt(index);
     }
   }
+
+  @override
+  int get count => notes.length;
 }

@@ -11,6 +11,7 @@ class CardAsync extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        elevation: 10.0,
         child: FutureBuilder<Note?>(
             future: note,
             initialData: Note(title: ""),
