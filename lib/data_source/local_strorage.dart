@@ -1,12 +1,12 @@
 import 'package:rumi_notes/model/note_id.dart';
 import 'package:rumi_notes/model/note.dart';
-import 'package:rumi_notes/model/storage_interface.dart';
+import 'package:rumi_notes/model/data_store_interface.dart';
 
-class LocalStorage extends StorageInterface {
+class LocalStorage extends IDataStore {
   List<Note> notes = [];
 
   LocalStorage() {
-    for (var v = 1; v < 10; v += 2) {
+    for (var v = 1; v < 50; v += 2) {
       notes.add(
         Note(
           id: NoteId(v),

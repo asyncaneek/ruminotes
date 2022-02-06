@@ -8,8 +8,7 @@ import 'package:rumi_notes/view/responsive/mobile_body.dart';
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
-  ValueNotifier<bool> isMenuOpen = ValueNotifier(false);
-  int currentIndex = 0;
+  final ValueNotifier<bool> isMenuOpen = ValueNotifier(false);
 
   final LocalStorage storage = LocalStorage();
 
@@ -18,9 +17,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+
   void onTileTap(int index) {
     setState(() {
-      widget.currentIndex = index;
+      currentIndex = index;
     });
   }
 
@@ -28,9 +29,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BackDrop(
       onMenuOpen: widget.isMenuOpen,
-      currentIndex: widget.currentIndex,
+      currentIndex: currentIndex,
       backLayer: BackdropMenu(
-        selectedItem: widget.currentIndex,
+        selectedItem: currentIndex,
         onTileTap: onTileTap,
         itemCount: menuItems.length,
       ),

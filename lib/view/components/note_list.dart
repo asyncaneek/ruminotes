@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rumi_notes/model/storage_interface.dart';
+import 'package:rumi_notes/model/data_store_interface.dart';
 import 'package:rumi_notes/view/components/card/card_async.dart';
 import 'package:rumi_notes/view/components/defines.dart';
 import 'package:rumi_notes/view/components/skeleton.dart';
 
 class CardList extends StatelessWidget {
-  final StorageInterface storage;
+  final IDataStore storage;
 
   const CardList({Key? key, required this.storage}) : super(key: key);
 

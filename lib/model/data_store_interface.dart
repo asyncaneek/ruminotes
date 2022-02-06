@@ -1,6 +1,6 @@
 import 'package:rumi_notes/model/note.dart';
 
-abstract class StorageInterface {
+abstract class IDataStore {
   int getNotesCount();
   Future<Note?> getNoteAtIndex(int index);
 }
