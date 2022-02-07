@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rumi_notes/view/components/colors.dart';
 import 'view/homepage.dart';
 
 void main() {
@@ -13,7 +14,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(
+          iconTheme: const IconThemeData(
+            color: backgroundColorApp,
+          ),
+          backgroundColor: backgroundColorApp,
+          cardColor: backgroundColorCard,
+          primarySwatch: Colors.deepPurple),
     );
   }
 }

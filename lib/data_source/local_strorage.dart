@@ -19,15 +19,14 @@ class LocalStorage extends IDataStore {
   }
 
   @override
-  int getNotesCount() {
-    return notes.length;
-  }
-
-  @override
   Future<Note?> getNoteAtIndex(int index) async {
     await Future.delayed(const Duration(milliseconds: 500));
     if (index < notes.length && index >= 0) {
       return notes.elementAt(index);
     }
+    return null;
   }
+
+  @override
+  int get count => notes.length;
 }

@@ -18,6 +18,6 @@ class CardList extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, i) =>
             const Skeleton(height: defaultPadding / 2),
-        itemCount: storage.getNotesCount());
+        itemCount: storage.count);
   }
 }

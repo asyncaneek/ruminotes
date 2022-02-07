@@ -17,7 +17,9 @@ class RuminoteAppBar extends StatelessWidget with PreferredSizeWidget {
         title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        const Spacer(),
         Text(title),
+        const Spacer(),
         _resolveIcon(),
       ],
     ));
