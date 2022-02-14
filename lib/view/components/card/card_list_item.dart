@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:rumi_notes/model/note.dart';
-import 'package:rumi_notes/view/components/card/card_bar.dart';
-import 'package:rumi_notes/view/components/card/card_body.dart';
-import 'package:rumi_notes/view/components/card/card_details.dart';
-import 'package:rumi_notes/view/components/card/card_title.dart';
 import 'package:rumi_notes/view/components/colors.dart';
 import 'package:rumi_notes/view/components/defines.dart';
 import 'package:intl/intl.dart';
 import 'package:rumi_notes/view/components/skeleton.dart';
 
-class NoteCard extends StatefulWidget {
+class CardListItem extends StatefulWidget {
   final Note? note;
 
-  const NoteCard({Key? key, this.note}) : super(key: key);
+  const CardListItem({Key? key, this.note}) : super(key: key);
 
   @override
-  State<NoteCard> createState() => _NoteCardState();
+  State<CardListItem> createState() => _CardListItemState();
 }
 
-class _NoteCardState extends State<NoteCard> {
+class _CardListItemState extends State<CardListItem> {
   late String titleStr;
   late String bodyStr;
   late String timeStr;
@@ -97,22 +93,22 @@ class _NoteCardState extends State<NoteCard> {
 
         // The child of the Slidable is what the user sees when the
         // component is not dragged.
-        child: buildCard(isExpanded && bodyStr.isNotEmpty));
+        child: _card(isExpanded && bodyStr.isNotEmpty));
   }
 
-  Widget buildCard(bool isExpanded) {
+  Widget _card(bool isExpanded) {
     List<Widget> children = [];
 
-    children.add(buildCardBar());
-    children.add(CardTitle(titleStr: titleStr));
+    children.add(_header());
+    children.add(_title());
     children.add(const Skeleton(height: defaultPadding / 2, opacity: 0));
 
     if (isExpanded) {
-      children.add(CardBody(bodyStr: bodyStr));
+      children.add(_body());
       children.add(const Skeleton(height: defaultPadding / 4, opacity: 0));
     }
 
-    children.add(const CardDetails());
+    children.add(_details());
     children.add(const Skeleton(height: defaultPadding / 4, opacity: 0));
 
     return InkWell(
@@ -122,19 +118,61 @@ class _NoteCardState extends State<NoteCard> {
           setExpanded(details.delta.dy >= 0);
         },
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, children: children),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children,
+        ),
       ),
     );
   }
 
-  Widget buildCardBar() {
+  Container _details() => Container();
+
+  Padding _body() {
+    return Padding(
+      padding:
+          const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
+      child: Text(
+        bodyStr,
+        maxLines: null,
+        style: const TextStyle(fontSize: 14),
+      ),
+    );
+  }
+
+  Padding _title() {
+    return Padding(
+      padding:
+          const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
+      child: Text(
+        titleStr,
+        style: const TextStyle(fontSize: 18),
+      ),
+    );
+  }
+
+  Padding _header() {
     return Padding(
       padding: const EdgeInsets.only(left: defaultPadding),
-      child: CardBar(
-        timeStr: timeStr,
-        isExpanded: isExpanded,
-        showDropDown: bodyStr.isNotEmpty,
-      ),
+      child: bodyStr.isNotEmpty
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(timeStr, style: const TextStyle(fontSize: 12)),
+                Icon(
+                  isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  size: 30.0,
+                  color: accentColor,
+                ),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Skeleton(height: defaultPadding / 2, opacity: 0),
+                Text(timeStr, style: const TextStyle(fontSize: 12)),
+                const Skeleton(height: defaultPadding / 2, opacity: 0),
+              ],
+            ),
     );
   }
 }

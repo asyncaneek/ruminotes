@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rumi_notes/view/components/defines.dart';
 import 'package:rumi_notes/view/components/skeleton.dart';
 
-class CardSkeleton extends StatelessWidget {
-  const CardSkeleton({
+class CardListItemSkeleton extends StatelessWidget {
+  const CardListItemSkeleton({
     Key? key,
   }) : super(key: key);
 

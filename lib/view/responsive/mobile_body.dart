@@ -43,13 +43,13 @@ class MobileBody extends StatelessWidget {
         },
         headerBuilder: (context, state) {
           return InkWell(
-              onTap: () {
-                var controller = SheetController.of(context);
-                state.isCollapsed
-                    ? controller!.expand()
-                    : controller!.collapse();
-              },
-              child: const CardCreateNewHeader());
+            onTap: () {
+              var controller = SheetController.of(context);
+              state = controller!.state!;
+              state.isCollapsed ? controller.expand() : controller.collapse();
+            },
+            child: const CardCreateNewHeader(),
+          );
         },
       ),
     );
