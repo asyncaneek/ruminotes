@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  date_field:
+    dependency: "direct main"
+    description:
+      name: date_field
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.3"
   fake_async:
     dependency: transitive
     description:
@@ -123,18 +130,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
-  sliding_up_panel:
+  sliding_sheet:
     dependency: "direct main"
     description:
-      name: sliding_up_panel
+      name: sliding_sheet
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+1"
+    version: "0.5.2"
   source_span:
     dependency: transitive
     description:

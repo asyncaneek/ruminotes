@@ -16,8 +16,10 @@ class CardList extends StatelessWidget {
         itemBuilder: (context, index) {
           return CardAsync(note: storage.getNoteAtIndex(index));
         },
-        separatorBuilder: (BuildContext context, i) =>
-            const Skeleton(height: defaultPadding / 2),
+        separatorBuilder: (BuildContext context, i) => const Skeleton(
+              height: defaultPadding / 2,
+              opacity: 0,
+            ),
         itemCount: storage.count);
   }
 }

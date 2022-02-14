@@ -39,7 +39,7 @@ class _NoteCardState extends State<NoteCard> {
       titleStr = widget.note!.title ?? "";
       bodyStr = widget.note!.text ?? "";
       if (widget.note!.time != null) {
-        timeStr = DateFormat('E, MMM dd').format(widget.note!.time!);
+        timeStr = DateFormat('E, MMM dd hh:mm aaa').format(widget.note!.time!);
       }
     }
   }

@@ -5,7 +5,7 @@ import 'package:rumi_notes/view/components/colors.dart';
 import 'package:rumi_notes/view/components/defines.dart';
 import 'package:rumi_notes/view/components/appbar.dart';
 import 'package:rumi_notes/view/components/note_list.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class MobileBody extends StatelessWidget {
   final ValueNotifier<bool> isMenuOpen;
@@ -20,13 +20,37 @@ class MobileBody extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColorApp,
       appBar: RuminoteAppBar(appName, isMenuOpen),
-      body: SlidingUpPanel(
-        panel: const CardCreateNew(),
-        body: CardList(storage: storage),
-        backdropEnabled: true,
-        renderPanelSheet: false,
-        minHeight: 70,
-        maxHeight: 420,
+      body: SlidingSheet(
+        duration: const Duration(milliseconds: 500),
+        elevation: 16,
+        cornerRadius: defaultCornerRadius,
+        closeOnBackButtonPressed: true,
+        closeOnBackdropTap: true,
+        isBackdropInteractable: false,
+        snapSpec: const SnapSpec(
+          snap: true,
+          snappings: [SnapSpec.headerSnap, SnapSpec.expanded],
+          positioning: SnapPositioning.relativeToAvailableSpace,
+        ),
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: defMaxWidth),
+            child: CardList(storage: storage),
+          ),
+        ),
+        builder: (context, state) {
+          return const CardCreateNewForm();
+        },
+        headerBuilder: (context, state) {
+          return InkWell(
+              onTap: () {
+                var controller = SheetController.of(context);
+                state.isCollapsed
+                    ? controller!.expand()
+                    : controller!.collapse();
+              },
+              child: const CardCreateNewHeader());
+        },
       ),
     );
   }
