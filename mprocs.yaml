@@ -1,0 +1,8 @@
+procs:
+  model:
+    shell: "cargo test"
+  backend:
+    shell: "cargo watch -- cargo run --bin backend -- --port 8081"
+  frontend:
+    cwd: "./frontend"
+    shell: "trunk serve --proxy-backend=http://[::1]:8081/api/"
