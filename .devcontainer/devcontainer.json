@@ -2,35 +2,5 @@
 	"name": "rust ruminote workspace",
 	"features": {
     "ghcr.io/devcontainers/features/rust:1": {}
-  },
-  "customizations": {
-      "vscode": {
-          "extensions": [
-              "vadimcn.vscode-lldb",
-              "mutantdino.resourcemonitor",
-              "rust-lang.rust-analyzer",
-              "tamasfe.even-better-toml",
-              "serayuzgur.crates"
-          ],
-          "settings": {
-              "files.watcherExclude": {
-                  "**/target/**": true
-              }
-          }
-      }
-  },
-  "containerEnv": {
-    "CARGO_HOME": "/usr/local/cargo",
-    "RUSTUP_HOME": "/usr/local/rustup",
-    "PATH": "/usr/local/cargo/bin:${PATH}"
-  },
-  "capAdd": [
-    "SYS_PTRACE"
-  ],
-  "securityOpt": [
-    "seccomp=unconfined"
-  ],
-  "installsAfter": [
-    "ghcr.io/devcontainers/features/common-utils"
-  ]
+  }
 }
