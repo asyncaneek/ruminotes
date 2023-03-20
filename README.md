@@ -1,5 +1,5 @@
 # Introduction 
-Project for delivering a mission document reader/editor to a browser for use in AIMS and C4.  
+Project for practicing daily mindful by collecting thoughts and ruminating on ways of improving your life  
 
 
 ## Getting Started
