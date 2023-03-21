@@ -215,6 +215,12 @@ if [ "${UPDATE_RUST}" = "true" ]; then
 fi
 echo "Installing common Rust dependencies..."
 rustup component add rls rust-analysis rust-src rustfmt clippy 2>&1
+echo "Installing Rust tools for wasm..."
+rustup component add target add wasm32-unknown-unknown
+cargo install trunk
+cargo install cargo-watch
+cargo install cargo-edit
+cargo install mprocs 
 
 # Add CARGO_HOME, RUSTUP_HOME and bin directory into bashrc/zshrc files (unless disabled)
 updaterc "$(cat << EOF
@@ -232,8 +238,4 @@ rm -rf /var/lib/apt/lists/*
 
 echo "Done!"
 
-# installing tools
-rustup target add wasm32-unknown-unknown
-cargo install trunk
-cargo install cargo-watch
-cargo install mprocs 
+
