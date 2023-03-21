@@ -48,7 +48,7 @@ pub fn note_list() -> Html {
             html! { <div>{"Loading..."}</div> }
         }
         Some(Ok(data)) => {
-            html! {<div>{ serde_json::to_string_pretty::<String>( &data.name ).unwrap() }</div>}
+            html! {<div>{ serde_json::to_string::<String>( &data.name ).unwrap() }</div>}
         }
         Some(Err(err)) => {
             html! { <div>{"Error requesting data from server: "}{err}</div> }

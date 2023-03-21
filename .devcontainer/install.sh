@@ -231,3 +231,9 @@ chmod -R g+r+w "${RUSTUP_HOME}" "${CARGO_HOME}"
 rm -rf /var/lib/apt/lists/*
 
 echo "Done!"
+
+# installing tools
+rustup target add wasm32-unknown-unknown
+cargo install trunk
+cargo install cargo-watch
+cargo install mprocs 
