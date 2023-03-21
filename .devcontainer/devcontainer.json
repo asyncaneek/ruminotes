@@ -3,7 +3,6 @@
 	"features": {
 		"ghcr.io/devcontainers/features/rust:1": {}
 	},
-	"dockerFile": "Dockerfile",
 	"extensions": [
 		"cschleiden.vscode-github-actions",
 		"ms-vsliveshare.vsliveshare",
@@ -11,5 +10,13 @@
 		"serayuzgur.crates",
 		"vadimcn.vscode-lldb",
 		"bungcip.better-toml"
-	]
+	],
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"docker-in-docker": "latest",
+		"github-cli": "latest"
+	},
+	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh"
 }
