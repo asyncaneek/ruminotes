@@ -10,13 +10,5 @@
 		"serayuzgur.crates",
 		"vadimcn.vscode-lldb",
 		"bungcip.better-toml"
-	],
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
-	"features": {
-		"docker-in-docker": "latest",
-		"github-cli": "latest"
-	},
-	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh"
+	]
 }
